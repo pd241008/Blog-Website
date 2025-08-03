@@ -8,14 +8,34 @@ async function getData(userId: string) {
   await new Promise((resolve) => setTimeout(resolve, 2000));
   const data = await prisma.blogPost.findMany({
     where: {
-      aurthodrId: userId, // ✅ Fixed typo here
+      authorId: userId, // ✅ fixed typo
+    },
+    include: {
+      author: {
+        select: {
+          id: true,
+          email: true,
+          image: true,
+        },
+      }, // ✅ include author data with image and name
     },
     orderBy: {
       createdAt: "desc",
     },
   });
 
-  return data;
+  // Type assertion to inform TypeScript that 'author' exists
+  return data.map((post) => ({
+    id: post.id,
+    title: post.title,
+    content: post.content,
+    imageUrl: post.imageUrl,
+    authoName: (post as typeof post & { author: { email: string } }).author
+      .email, // Use author email as name or replace with actual name if available
+    authorImage: (post as typeof post & { author: { image: string } }).author
+      .image,
+    createdAt: post.createdAt,
+  }));
 }
 
 export default async function DashboardRoute() {
@@ -38,7 +58,6 @@ export default async function DashboardRoute() {
     <div>
       <div className="flex items-center justify-between mb-4">
         <h2 className="text-xl font-medium">Your Blog Articles</h2>
-
         <Link className={buttonVariants()} href="/dashboard/create">
           Create Post
         </Link>
