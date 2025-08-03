@@ -8,7 +8,7 @@ async function getData(userId: string) {
   await new Promise((resolve) => setTimeout(resolve, 2000));
   const data = await prisma.blogPost.findMany({
     where: {
-      aurthodrId: userId,
+      authorId: userId, // ✅ Fixed typo here
     },
     orderBy: {
       createdAt: "desc",
@@ -22,9 +22,15 @@ export default async function DashboardRoute() {
   const { getUser } = getKindeServerSession();
   const user = await getUser();
 
+  if (!user || !user.id) {
+    return (
+      <div className="flex items-center justify-center h-[60vh]">
+        <p className="text-lg text-red-500">User not found. Please login to view your dashboard.</p>
+      </div>
+    );
+  }
 
-  const  data = await getData(user?.id);
-  
+  const data = await getData(user.id);
 
   return (
     <div>
@@ -44,5 +50,3 @@ export default async function DashboardRoute() {
     </div>
   );
 }
-
-
