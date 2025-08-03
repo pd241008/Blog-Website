@@ -24,7 +24,7 @@ export default async function DashboardRoute() {
 
   let data = [];
   if (user?.id) {
-    data = await getData(user.id);
+    data = await getData(user?.id);
   }
 
   return (
@@ -45,3 +45,4 @@ export default async function DashboardRoute() {
     </div>
   );
 }
+
