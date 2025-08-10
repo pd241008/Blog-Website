@@ -16,20 +16,18 @@ export async function NavBar() {
       <div className="flex items-center gap-6">
         <Link href="/">
           <h1 className="text-3xl font-bold">
-            Blog<span className="text-blue-500">Marshal</span>
+            Blog<span className="text-blue-500">Website</span>
           </h1>
         </Link>
         <div className="hidden sm:flex items-center gap-6">
           <Link
             href="/"
-            className="text-sm font-medium hover:text-blue-500 transition-colors"
-          >
+            className="text-sm font-medium hover:text-blue-500 transition-colors">
             Home
           </Link>
           <Link
             href="/dashboard"
-            className="text-sm font-medium hover:text-blue-500 transition-colors"
-          >
+            className="text-sm font-medium hover:text-blue-500 transition-colors">
             Dashboard
           </Link>
         </div>

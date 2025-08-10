@@ -1,6 +1,5 @@
 generator client {
   provider = "prisma-client-js"
-  output   = "../app/generated/prisma"
 }
 
 datasource db {
@@ -9,13 +8,14 @@ datasource db {
 }
 
 model BlogPost {
-  id          String   @id @default(uuid())
+  id          String @id @default(uuid())
   title       String
   content     String
   imageUrl    String
-  aurthodrId  String
-  authoName   String
+  authorId    String
+  authorName  String
   authorImage String
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

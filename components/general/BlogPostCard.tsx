@@ -7,7 +7,7 @@ interface IappProps {
     title: string;
     content: string;
     imageUrl: string;
-    authoName: string;
+    authorName: string;
     authorImage: string;
     createdAt: Date;
   };
@@ -16,7 +16,9 @@ interface IappProps {
 export function BlogPostCard({ data }: IappProps) {
   return (
     <div className="group relative overflow-hidden rounded-lg border border-gray-200 bg-white shadow-md transition-all hover:shadow-lg">
-      <Link href={`/post/${data.id}`} className="block w-full h-full">
+      <Link
+        href={`/post/${data.id}`}
+        className="block w-full h-full">
         <div className="relative h-48 w-full overflow-hidden">
           <Image
             src={data.imageUrl}
@@ -40,13 +42,13 @@ export function BlogPostCard({ data }: IappProps) {
               <div className="relative size-8 overflow-hidden rounded-full">
                 <Image
                   src={data.authorImage}
-                  alt={data.authoName || "Author image"}
+                  alt={data.authorName || "Author image"}
                   fill
                   className="object-cover"
                 />
               </div>
               <p className="text-sm font-medium text-gray-700">
-                {data.authoName}
+                {data.authorName}
               </p>
             </div>
 
